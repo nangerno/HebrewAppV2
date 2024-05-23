@@ -1,0 +1,20 @@
+.container {
+    margin-top: 0;
+    width: 50vw;
+    height: auto;
+    /* background-color: antiquewhite; */
+}
+
+hr {
+    border: none; /* Remove default border */
+    border-top: 5px solid #000000; /* Top border with 5px thickness and color */
+}
+
+.title {
+    text-decoration: underline;
+}
+
+.down_img {
+    width: 50%;
+    height: 80px;
+}
