@@ -18,3 +18,7 @@ hr {
     width: 50%;
     height: 80px;
 }
+
+#fileError {
+    display: none;
+}

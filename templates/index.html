@@ -15,12 +15,14 @@
     <div class="container">
         <div class="row">
           <div class="col-sm-6">
-            <h3 class="mt-5">Upload Files</h3>
+            <h3 class="mt-4">Upload Files</h3>
             <hr>
-            <a class="float-end mb-5 ">PDF or JPEG/JPG</a>
-            <input type="file" class="form-control mb-2" id="imageInput">
+            <a class="float-end mb-2 ">PDF or JPEG/JPG</a>
+            <input type="file" class="form-control mb-4" id="imageInput" accept=".jpg, .jpeg, .png, .pdf">
+            <div id="fileError" class="mb-2" style="color: red;"></div>
           </div>
-          <div class="col-sm-6"></div>
+          <div class="col-sm-6">
+          </div>
         </div>
 
         <div class="row">
@@ -54,18 +56,18 @@
         </div>
         <div class="row">
             <div class="col-sm-6">
-                <h3 class="mt-5">Download Files</h3>
+                <h3 class="mt-4">Download Files</h3>
                 <hr>
                 <div style="display: grid; grid-template-columns: 1fr 1fr 1fr;">
-                  <a href="{{ url_for('static', filename='files/example.pdf') }}" download><img class="down_img" src="../static/PDF_file.png"></a>
-                  <img class="down_img" src="../static/WORD_file.png">
+                  <a href="{{ url_for('static', filename='example.pdf') }}" download="example.pdf"><img class="down_img" src="{{ url_for('static', filename='PDF_file.png') }}"></a>
+                  <a href="{{ url_for('static', filename='example.docx') }}" download="example.docx"><img class="down_img" src="{{ url_for('static', filename='WORD_file.png') }}"></a>
                   <span></span>
                 </div>
             </div>
             <div class="col-sm-6">
-              <h3 class="mt-5">Send to Email</h3>
+              <h3 class="mt-4">Send to Email</h3>
               <hr>
-              <input class="form-control mt-2 mb-4" type="email" placeholder="Email Address">
+              <input class="form-control mt-2 mb-4" type="email" placeholder="Email Address: example@mail.com">
             </div>
             <div class="col-sm-6">
             </div>
