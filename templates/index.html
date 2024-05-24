@@ -47,8 +47,7 @@
           <div class="col-sm-6">
             <select class="form-select form-select-lg" id="translate">
                 <option value="">Language</option>
-                <option value="en">English</option>
-                <option value="hr">Hibrew</option>
+                <option value="heb">Hebrew</option>
             </select>
             <input class="form-control mt-4" type="text" placeholder="First Name">
             <input class="form-control mt-2" type="text" placeholder="Father's Father First Name">
@@ -59,15 +58,15 @@
                 <h3 class="mt-4">Download Files</h3>
                 <hr>
                 <div style="display: grid; grid-template-columns: 1fr 1fr 1fr;">
-                  <a href="{{ url_for('static', filename='example.pdf') }}" download="example.pdf"><img class="down_img" src="{{ url_for('static', filename='PDF_file.png') }}"></a>
-                  <a href="{{ url_for('static', filename='example.docx') }}" download="example.docx"><img class="down_img" src="{{ url_for('static', filename='WORD_file.png') }}"></a>
-                  <span></span>
+                  <a href="{{ url_for('static', filename='example.pdf') }}" download="example.pdf"><img class="down_img img-thumbnail" src="{{ url_for('static', filename='PDF_file.png') }}"></a>
+                  <a href="{{ url_for('static', filename='example.docx') }}" download="example.docx"><img class="down_img img-thumbnail" src="{{ url_for('static', filename='WORD_file.png') }}"></a>
                 </div>
             </div>
             <div class="col-sm-6">
               <h3 class="mt-4">Send to Email</h3>
               <hr>
-              <input class="form-control mt-2 mb-4" type="email" placeholder="Email Address: example@mail.com">
+              <input class="form-control mt-2 mb-4 " type="email" placeholder="Email Address: example@mail.com">
+              <button class="form-control btn btn-outline-info mb-2" id="mailsend">>>Send</button>
             </div>
             <div class="col-sm-6">
             </div>

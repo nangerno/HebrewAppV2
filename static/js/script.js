@@ -85,3 +85,27 @@ $('#translate').change(function(){
     }
 })
 
+$('#mailsend').click(function(){
+  const fileInput = document.getElementById('imageInput');
+  const file = fileInput.files[0];
+  if (!file) {
+    console.log("file is not exist")
+    return;
+  }
+  fetch('/send_file', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      "to": "to"
+    })
+  })
+  .then(response => response.text())
+  .then(data => {
+    console.log(data)
+  })
+  .catch(error => {
+      responseDiv.textContent = 'An error occurred: ' + error;
+  });
+})
