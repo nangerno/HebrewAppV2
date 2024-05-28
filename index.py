@@ -11,8 +11,8 @@ SECRET_KEY = os.urandom(32)
 app.config['SECRET_KEY'] = SECRET_KEY
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
-app.config['MAIL_USERNAME'] = 'nangerno@gmail.com'
-app.config['MAIL_PASSWORD'] = 'ynbngbdvcygzsjaa'
+app.config['MAIL_USERNAME'] = 'your gmail'
+app.config['MAIL_PASSWORD'] = 'your flask app password'
 app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USE_SSL'] = False
 mail = Mail(app)
@@ -48,15 +48,15 @@ def download_file(filename):
 
 @app.route('/send_file', methods=['POST'])
 def send_file():
-    recipient_email = "smile444621@gmail.com"
+    recipient_email = "recipient address"
     # file_path = Path("static/example.pdf")  # Replace with the actual file path
     # with file_path.open(mode="rb") as file:
     #     file_data = file.read()
 
     msg = Message("Email with File Attachment",
-                  sender="nangerno@gmail.com",
+                  sender="sender mail",
                   recipients=[recipient_email])
-    msg.body = "gfdsfdsfdsfdsf."
+    msg.body = "message has been sent by sender."
     # msg.html = "<b>testing</b>"
     # msg.attach(file_path.name, "application/pdf", file_data)  # Attach the file
 
