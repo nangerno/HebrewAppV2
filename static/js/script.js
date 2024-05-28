@@ -1,4 +1,9 @@
 let validata = false
+let inputType = ''
+function getFileExtension(filename) {
+  const extension = filename.split('.').pop();
+  return extension;
+}
 function validateFile(fileInput) {
   const allowedExtensions = /(\.jpg|\.jpeg|\.png|\.pdf)$/i;
   const fileError = document.getElementById('fileError');
@@ -14,11 +19,25 @@ function validateFile(fileInput) {
   }
 }
 $('#imageInput').change(function(){
-  console.log(this)
   validata = validateFile(this)
+  const fileExtension = getFileExtension(this.value);
+  switch(fileExtension.toLowerCase()) {
+    case 'jpg':
+    case 'jpeg':
+      inputType = 'image/jpeg';
+      break;
+    case 'png':
+      inputType = 'image/png';
+      break;
+    case 'pdf':
+      inputType = 'application/pdf';
+      break;
+    default:
+      inputType = '';
+      break;
+  }
 })
 $('#translate').change(function(){
-    // let to = this.value
     if(!validata) {
       const fileError = document.getElementById('fileError');
       fileError.textContent = 'Please input a correct file type.';
@@ -34,7 +53,8 @@ $('#translate').change(function(){
           const base64ImageWithPrefix = fileReader.result;
           // Remove the data URI prefix from the base64-encoded string
           const base64ImageWithoutPrefix = base64ImageWithPrefix.split(',')[1];
-          let accessToken = 'ya29.c.c0AY_VpZga7rcQOd8xqi-tnBJyBPN3MEQufzGIXVbHqHzjFOQnyWPmAa8ttFgMlUfmxKEULJt0Brfl1bqZM2zQIxVkml0xmWTebBhPTTP0p_jjqS4GoN6w7y6GYkvbj2KekbAky06cjZM6EEbyoZT3UoXfwHGNysJQfPCRNxG4VkIBtSsLpoDuiMtvRbgPvMvCEEWt1zfp9lrnlqBLQecjI6HX91uMsuddn46D-c3LwGL--zGUHfKGpc3XFGM10UHJyKVNTlUzxGNf9n2CfXdbSCVltv-uY43OhU5JeaHWRVDufNZkZFVxZC7RrzcBGI-Mw7nNOr15If8E2no2t3-Ao2C-5PbY_ImSPmVUn_X56P73khyNF9PSrHkE384C3o8xMwkBlbMzinJ3Z62-I8WwOmxkdanmjRJ9dv2_iZVimn0B329dgx7F7XOoUFIoSseUQOcFZp0Qgb3_sxysVtjsepIf2z1dIZnendF8y9x4Fyi2JX4yqxmf6rgS9XkO1wJ2FMtxm2g4rV8mtz2I5QXj96lgMRaloFfXOeU-0ywck8mwt_cd9XbhR1k5RXfxWhx96X9d4ahhYcsu682uuqMrY_MxkrJBYcFFv8hR3XcJMy3m0iplRrtmBq4Mkr-gx99irJZy1-MFhmerjFOtQryMeI4lfQ5qZa_V9X7J1If5afOIIzi9jnwfB7s6b5IidvmYcwaj6qhecB-JqMS7oxwSm1rIqX8yBa-6F4fkBtV9wwi0R12y5Ugg22FO3b6uY_I_ahttg7StMOnau6WezmyShhriM47jd49BOonf3eV5plSQb81h8rhc6eyBl9n3whWRXa_fwYWidBXbV4ItkgvFeqUv6ggR1gM6bMiliSWwXsOv0xZll4BddyJInlxQ-uu9Q4udJB38XI8_JYB63ttVFou4lFarkrhU6pYi-onfqzogOxakq51v11e_I0bcmsOe33ws_soWlZQuo0yyS2aIs1-IJO9BbYohvYJ-z7lWYZf6atkmqcrrnj1'
+          let accessToken = document.getElementById('token').textContent;
+          document.getElementById('token').textContent = null
           fetch('https://eu-documentai.googleapis.com/v1/projects/679844559797/locations/eu/processors/fdac58f1e29315ea:process', {
               method: 'POST',
               headers: {
@@ -45,7 +65,7 @@ $('#translate').change(function(){
                   {
                       "skipHumanReview": false,
                       "rawDocument": {
-                      "mimeType": "image/png",
+                      "mimeType": `${inputType}`,
                       "content": `${base64ImageWithoutPrefix}`
                       },
                       "fieldMask": "",

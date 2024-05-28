@@ -3,24 +3,30 @@ from translatepy.translators.google import GoogleTranslate, Language
 from flask_mail import Mail, Message
 from pathlib import Path
 import os
+import config
 
 app = Flask(__name__)
-mail = Mail(app)
+
 SECRET_KEY = os.urandom(32)
 app.config['SECRET_KEY'] = SECRET_KEY
-# app.config.from_pyfile('config.py')
-# twillo :QTJX6R6Z3RECLW1BRNAATY77
-app.config["MAIL_SERVER"] = "smtp.gmail.com"
-app.config["MAIL_PORT"] = 465
-app.config['MAIL_USE_TLS'] = False
-app.config['MAIL_USE_SSL'] = True
-app.config["MAIL_USERNAME"] = 'nangerno@gmail.com'
-app.config["MAIL_PASSWORD"] = 'nangerno@!%9984'
-mail.init_app(app)
+app.config['MAIL_SERVER']='smtp.gmail.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USERNAME'] = 'nangerno@gmail.com'
+app.config['MAIL_PASSWORD'] = 'ynbngbdvcygzsjaa'
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USE_SSL'] = False
+mail = Mail(app)
+
+def create_app():
+    return app
 
 @app.route('/', methods=['GET', 'POST'])
 def start():
-    return render_template('index.html')
+    token = config.get_access_token() 
+    data = {
+        "token": token
+    }
+    return render_template('index.html', data=data)
 
 @app.route('/translate', methods=['POST'])
 def translate():
@@ -43,14 +49,14 @@ def download_file(filename):
 @app.route('/send_file', methods=['POST'])
 def send_file():
     recipient_email = "smile444621@gmail.com"
-    file_path = Path("static/example.pdf")  # Replace with the actual file path
-    with file_path.open(mode="rb") as file:
-        file_data = file.read()
+    # file_path = Path("static/example.pdf")  # Replace with the actual file path
+    # with file_path.open(mode="rb") as file:
+    #     file_data = file.read()
 
     msg = Message("Email with File Attachment",
                   sender="nangerno@gmail.com",
                   recipients=[recipient_email])
-    msg.body = "Please find the attached file."
+    msg.body = "gfdsfdsfdsfdsf."
     # msg.html = "<b>testing</b>"
     # msg.attach(file_path.name, "application/pdf", file_data)  # Attach the file
 
